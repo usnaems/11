@@ -6,12 +6,11 @@ import copy
 
 pygame.init()
 
-# screen settings
+# настройки экрана
 WIDTH, HEIGHT = 540, 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Судоку")
 
-# colors and font
 BG_COLOR = (255, 255, 255)
 LINE_COLOR = (0, 0, 0)
 HIGHLIGHT_COLOR = (200, 200, 255)
@@ -19,21 +18,21 @@ INCORRECT_COLOR = (255, 100, 100)
 FONT = pygame.font.Font(None, 40)
 SMALL_FONT = pygame.font.Font(None, 30)
 
-# difficulty settings
+# настройки сложности
 difficulty_levels = {
     "easy": 30,  # 30 cells to keep
     "medium": 20,
     "hard": 10
 }
 
-# cell and grid
+
 CELL_SIZE = WIDTH // 9
 SELECTED_CELL = None
 incorrect_cell = set()  # to track incorrect guesses
 attempts = 5
 
 
-# generate a full, valid sudoku board
+# генерация доски
 def generate_full_board():
     board = [[0] * 9 for _ in range(9)]
 
@@ -67,7 +66,7 @@ def generate_full_board():
     return board
 
 
-# create a puzzle by removing cells based on difficulty
+
 def create_puzzle(board, difficulty):
     puzzle = copy.deepcopy(board)
     cells_to_remove = 81 - difficulty_levels[difficulty]
@@ -79,7 +78,7 @@ def create_puzzle(board, difficulty):
     return puzzle
 
 
-# draw the board grid
+
 def draw_grid():
     SCREEN.fill(BG_COLOR)
     for row in range(9):
@@ -97,7 +96,7 @@ def draw_grid():
             if BOARD[row][col] != 0:
                 text = FONT.render(str(BOARD[row][col]), True, LINE_COLOR)
                 SCREEN.blit(text, (cell_x + CELL_SIZE // 3, cell_y + CELL_SIZE // 3))
-    # Draw lines
+    
     for i in range(10):
         width = 4 if i % 3 == 0 else 1
         pygame.draw.line(SCREEN, LINE_COLOR, (0, i * CELL_SIZE), (WIDTH, i * CELL_SIZE), width)
@@ -107,7 +106,7 @@ def draw_grid():
     SCREEN.blit(attempt_text, (10, HEIGHT - 40))
 
 
-# place a number in the selected cell
+
 def place_number(num):
     global attempts
     if SELECTED_CELL:
@@ -147,7 +146,7 @@ def end_game(message):
                     sys.exit()
 
 
-# Difficulty selection function
+# функция выбора сложности
 def choose_difficulty():
     global BOARD, SOLUTION, attempts
     while True:
@@ -180,7 +179,7 @@ def choose_difficulty():
                     return
 
 
-# Main game loop
+# Main 
 choose_difficulty()
 running = True
 while running:
