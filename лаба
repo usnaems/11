@@ -9,7 +9,7 @@ pygame.init()
 # screen settings
 WIDTH, HEIGHT = 540, 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("SudoKu")
+pygame.display.set_caption("Судоку")
 
 # colors and font
 BG_COLOR = (255, 255, 255)
